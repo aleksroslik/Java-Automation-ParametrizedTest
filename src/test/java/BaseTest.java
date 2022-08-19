@@ -18,8 +18,8 @@ public class BaseTest {
     void setUp() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.manage().timeouts().getPageLoadTimeout();
     }
+
     @AfterEach
     void close() {
         driver.quit();
