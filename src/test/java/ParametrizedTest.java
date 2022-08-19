@@ -9,7 +9,8 @@ public class ParametrizedTest extends BaseTest {
     @ParameterizedTest
     @ValueSource(strings = {"Rozwiązania i usługi IT, inżynierii i BPO - Sii Polska"})
     @DisplayName("Check title for Sii")
-    @Tag("Sii") @Tag("Regression")
+    @Tag("sii")
+    @Tag("regression")
     void checkTitleSii(String expectedTitle) {
         driver.get("https://sii.pl");
         String actualTitle = driver.getTitle();
@@ -18,7 +19,8 @@ public class ParametrizedTest extends BaseTest {
     @ParameterizedTest
     @ValueSource(strings = {"Onet – Jesteś na bieżąco"})
     @DisplayName("Check title for Onet.pl")
-    @Tag("Onet") @Tag("Regression")
+    @Tag("onet")
+    @Tag("regression")
     void checkTitleOnet(String expectedTitle) {
         driver.get("https://www.onet.pl/");
         String actualTitle = driver.getTitle();
@@ -27,18 +29,20 @@ public class ParametrizedTest extends BaseTest {
     @ParameterizedTest
     @ValueSource(strings = {"Kotuszkowo- blog o kotach"})
     @DisplayName("Check title for Kotuszkowo")
-    @Tag("Kotuszkowo") @Tag("Regression")
+    @Tag("kotuszkowo")
+    @Tag("regression")
     void checkTitleKotuszkowo(String expectedTitle) {
         driver.get("http://kotuszkowo.pl/");
         String actualTitle = driver.getTitle();
         assertThat(actualTitle).isEqualTo(expectedTitle);
     }
     @ParameterizedTest
-    @ValueSource(strings = {""})
+    @ValueSource(strings = {"Filmweb - filmy takie jak Ty!"})
     @DisplayName("Check title for FilmWeb")
-    @Tag("Film") @Tag("Regression")
+    @Tag("film")
+    @Tag("regression")
     void checkTitleFilmWeb(String expectedTitle) {
-        driver.get("kttps://www.filmweb.pl");
+        driver.get("https://www.filmweb.pl");
         String actualTitle = driver.getTitle();
         assertThat(actualTitle).isEqualTo(expectedTitle);
     }
@@ -46,7 +50,8 @@ public class ParametrizedTest extends BaseTest {
     @ParameterizedTest
     @ValueSource(strings = {"WebDriver | Selenium"})
     @DisplayName("Check title for Selenium")
-    @Tag("Selenium") @Tag("Regression")
+    @Tag("selenium")
+    @Tag("regression")
     void checkTitleSelenium(String expectedTitle) {
         driver.get("https://www.selenium.dev/documentation/en/webdriver/");
         String actualTitle = driver.getTitle();
