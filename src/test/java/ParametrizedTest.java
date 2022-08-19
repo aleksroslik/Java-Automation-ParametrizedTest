@@ -16,6 +16,7 @@ public class ParametrizedTest extends BaseTest {
         String actualTitle = driver.getTitle();
         assertThat(actualTitle).isEqualTo(expectedTitle);
     }
+
     @ParameterizedTest
     @ValueSource(strings = {"Onet – Jesteś na bieżąco"})
     @DisplayName("Check title for Onet.pl")
@@ -26,6 +27,7 @@ public class ParametrizedTest extends BaseTest {
         String actualTitle = driver.getTitle();
         assertThat(actualTitle).isEqualTo(expectedTitle);
     }
+
     @ParameterizedTest
     @ValueSource(strings = {"Kotuszkowo- blog o kotach"})
     @DisplayName("Check title for Kotuszkowo")
@@ -36,6 +38,7 @@ public class ParametrizedTest extends BaseTest {
         String actualTitle = driver.getTitle();
         assertThat(actualTitle).isEqualTo(expectedTitle);
     }
+
     @ParameterizedTest
     @ValueSource(strings = {"Filmweb - filmy takie jak Ty!"})
     @DisplayName("Check title for FilmWeb")
