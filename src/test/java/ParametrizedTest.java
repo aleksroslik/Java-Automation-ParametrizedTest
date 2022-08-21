@@ -1,6 +1,5 @@
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -54,15 +53,6 @@ public class ParametrizedTest extends BaseTest {
     @Tag("selenium")
     void checkTitleSelenium(String expectedTitle) {
         driver.get("https://www.selenium.dev/documentation/en/webdriver/");
-        String actualTitle = driver.getTitle();
-        assertThat(actualTitle).isEqualTo(expectedTitle);
-    }
-
-    @ParameterizedTest(name = "Title for {0}")
-    @MethodSource("DataProvider#data")
-    @DisplayName("Check title for pages")
-    void checkTitle(String url, String expectedTitle) {
-        driver.get(url);
         String actualTitle = driver.getTitle();
         assertThat(actualTitle).isEqualTo(expectedTitle);
     }
