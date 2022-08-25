@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 
 public class BaseTest {
 
-    public static Logger logger = LoggerFactory.getLogger(BaseTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(BaseTest.class);
 
     WebDriver driver;
 
