@@ -15,23 +15,22 @@ public enum PropertiesStore {
     ENVIRONMENT("environment");
 
     private String value;
-    private String propertyKey;
+    private String propertyKey; // mapowanie properties ktore skladaja sie z key i values
 
-    public static final String CONFIG_PROPERTIES = "config.properties";
+    public static final String CONFIG_PROPERTIES = "config.properties"; // link do pliku config w resources
 
-    private static Properties properties = null;
+    private static Properties properties = null; // klasa pozwalajaca na obslugiwanie properties
 
-    private PropertiesStore(String key) {
+    private PropertiesStore(String key) { // tylko key ze względu na różne typy (int, string, boolean)
         this.propertyKey = key;
         this.value = this.retrieveValue(key);
     }
 
     private String retrieveValue(String key) {
-        return System.getProperty(key) != null ? System.getProperty(key) : getValueFromConfigFile(key);
-
+        return System.getProperty(key) != null ? System.getProperty(key) : getValueFromConfigFile(key); // metoda pobierajaca wartosc dla danego klucza
     }
 
-    private String getValueFromConfigFile(String key) {
+    private String getValueFromConfigFile(String key) { // ladowanie properties z pliku
         if (properties == null) {
            properties = loadConfigFile(); 
         } 
@@ -39,7 +38,7 @@ public enum PropertiesStore {
         return objectFromFile != null ? Objects.toString(objectFromFile) : null; 
     }
 
-    private Properties loadConfigFile() {
+    private Properties loadConfigFile() { // laczy sie z plikiem i pobiera, tylko raz i to wystarczy
         Properties copy = null;
         try {
             InputStream configFileStream = ClassLoader.getSystemClassLoader().getResourceAsStream("config.properties");
@@ -63,7 +62,7 @@ public enum PropertiesStore {
         }
         return copy;
     }
-
+    // sprawdzanie czy nie jest pusta wartosc - isSpecified()
     public boolean isSpecified() {
         return StringUtils.isNotEmpty(this.value);
     }

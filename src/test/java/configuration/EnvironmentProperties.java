@@ -20,13 +20,13 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class EnvironmentProperties {
 
     private static Logger logger = LoggerFactory.getLogger(EnvironmentProperties.class);
-    private final String APP_ENV;
+    private final String APP_ENV; // srodowisko aplikacji
 
-    public static EnvironmentProperties getInstance() {
+    public static EnvironmentProperties getInstance() { // singleton, inicjalizowany raz
         return EnvironmentProperties.EnvironmentPropertySingleton.INSTANCE;
     }
 
-    private static class EnvironmentPropertySingleton {
+    private static class EnvironmentPropertySingleton { // metoda zwracajaca obiekt
         private static final EnvironmentProperties INSTANCE = new EnvironmentProperties();
     }
 
@@ -35,6 +35,12 @@ public class EnvironmentProperties {
         this.initEnv();
     }
 
+    // inicjalizacja srodowiska aplikacji
+    private String initAppEnv() {
+        return PropertiesStore.ENVIRONMENT.isSpecified() ? PropertiesStore.ENVIRONMENT.getValue() : "";
+    }
+
+    // pobieranie wartosci
     private void initEnv() {
         if (!this.APP_ENV.isEmpty()) {
             logger.debug("Environment name " + this.APP_ENV);
@@ -54,9 +60,9 @@ public class EnvironmentProperties {
         if (url != null) {
             Properties environmentProperties = new Properties();
             try {
-                Stream<Path> files = Files.walk(Paths.get(url.toURI()));
-
+                Stream<Path> files = Files.walk(Paths.get(url.toURI())); // przechodzi automatycznie po wszystkich folderach (resources), daje to strumien
                 try {
+                    //znalezienie odpowiedniego pliku i zaladowanie informacji
                     ((List)files.filter((x$0) -> {
                         return Files.isRegularFile(x$0, new LinkOption[0]);
                     }).collect(Collectors.toList())).forEach((path) -> {
@@ -76,12 +82,14 @@ public class EnvironmentProperties {
                             logger.error("error 3");
                         }
                     } else {
+                        assert false;
                         files.close();
                     }
                 }
             } catch (Exception r) {
                 logger.error("error 4");
             }
+            // wszystko co się zaladuje znajdzie sie w konsoli i zmienne znajdujace sie w pliku
             logger.debug("#### Loading property from uri {}", url.toString());
             environmentProperties.forEach((propertyName, propertyValue) -> {
                 if (System.getProperty(propertyName.toString()) == null) {
@@ -93,9 +101,5 @@ public class EnvironmentProperties {
         } else {
             logger.warn("No such property directory '{}' present in the resources ,make sure you are providing correct directory name.", dirName);
         }
-    }
-
-    private String initAppEnv() {
-        return PropertiesStore.ENVIRONMENT.isSpecified() ? PropertiesStore.ENVIRONMENT.getValue() : "";
     }
 }
